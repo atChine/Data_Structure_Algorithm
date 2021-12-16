@@ -46,6 +46,32 @@ class SingleLinkedList{
         //当退出while时，temp就指向了链表的最后,然后指向新的节点就可
         temp.next=heroNode;
     }
+
+    //添加数据(添加数据时，要求指定位置添加)...(如果有这个排名，则添加失败，并给出提示)
+    public  void  addByOrder(HeroNode heroNode){
+        HeroNode temp = head;
+        boolean flag = false; //默认添加的编号不存在,可以添加
+        //遍历链表，找到排名的前一个位置
+        while (true){
+            if(temp.next==null){ //说明到链表的最后了
+                break;
+            }if(temp.next.no>heroNode.no ){ //位置找到了，在temp之间
+                break;
+            }else if(temp.next.no == heroNode.no){
+                flag = true;//说明编号存在，不能添加了
+                break;
+            }
+            temp=temp.next;
+        }
+        if(false){
+            System.out.printf("排名%d存在，不能添加了",heroNode.no);
+        }else {
+            //插入到链表中，在temp的后面
+            heroNode.next = temp.next;
+            temp.next = heroNode;
+        }
+    }
+
     //显示链表[遍历]
     public void list(){
         //判断链表是否为空
